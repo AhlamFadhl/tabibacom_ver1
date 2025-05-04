@@ -1,5 +1,5 @@
 
-const PATH_URL = 'https://naseh-digital.com/tabibacom/app/m/';
+const PATH_URL = 'https://tabibacom.com/app/v1/';
 const PATH_IMG = PATH_URL + 'images/';
 const LOGIN = 'user/login';
 const REGISTER = 'user/new';
