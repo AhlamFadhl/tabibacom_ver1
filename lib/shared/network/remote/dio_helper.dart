@@ -10,7 +10,7 @@ class DioHelper {
         baseUrl: // 'http://192.168.8.126/api/', //192.168.0.66
             // 'https://kafooaden.com/tabibacom/m/',
           //  'https://localhost/m/',
-          PATH_URL,
+        PATH_URL,
         receiveDataWhenStatusError: true,
       ),
     );

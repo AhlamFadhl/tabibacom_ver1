@@ -13,11 +13,11 @@ class HomeLayout extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
+         /* appBar: AppBar(
             title: Text(
               cubit.titles[cubit.currentIndex],
             ),
-          ),
+          ),*/
           body: cubit.screens[cubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

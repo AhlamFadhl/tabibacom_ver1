@@ -403,7 +403,7 @@ Widget buildHospitalItem(Hospital hsptl, context) => InkWell(
         height: 150,
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: primaryColor.withOpacity(0.3),
+          color: primaryColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Column(

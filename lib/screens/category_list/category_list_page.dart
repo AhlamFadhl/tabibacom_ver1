@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
+import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 
 class CategoryListPage extends StatelessWidget {
@@ -13,7 +15,7 @@ class CategoryListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('الأقسام'),
+        title: Text('العيادات'),
       ),
       body: Container(
         child: SingleChildScrollView(
@@ -44,16 +46,16 @@ class CategoryListPage extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 2,
-                      color: Colors.grey.shade200,
-                      offset: Offset(1, 1),
-                      spreadRadius: 1,
-                    )
-                  ]),
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 1,
+                      offset: Offset(0, 0),
+                      spreadRadius: 0)
+                ],
+              ),
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: MaterialButton(
                 child: ListTile(
@@ -75,7 +77,11 @@ class CategoryListPage extends StatelessWidget {
                     cat.cat_name,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(
+                    DoctorListPage(),
+                  );
+                },
               ),
             ),
           ],
