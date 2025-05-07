@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
+import 'package:tabibacom_ver1/screens/insurance_list/cubit/cubit.dart';
+import 'package:tabibacom_ver1/screens/region_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/splash/splash_page.dart';
 import 'package:tabibacom_ver1/shared/cubit/cubit.dart';
 import 'package:tabibacom_ver1/shared/cubit/states.dart';
@@ -34,11 +36,17 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeCubit()
-            ..getAllDoctors()
+            //  ..getAllDoctors()
             ..getAllCategory()
             ..getAllHospital(),
         ),
-        BlocProvider(create: (context) => DoctorCubit()),
+        BlocProvider(create: (context) => DoctorCubit()..getAllDoctors()),
+        BlocProvider(
+          create: (context) => RegionCubit()..getAllRegion(),
+        ),
+        BlocProvider(
+          create: (context) => InsuranceCubit()..getAllInsurance(),
+        ),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},

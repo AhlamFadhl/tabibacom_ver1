@@ -3,7 +3,7 @@ const PATH_URL = 'https://tabibacom.com/app/v1/';
 const PATH_IMG = PATH_URL + 'images/';
 const LOGIN = 'user/login';
 const REGISTER = 'user/new';
-const DOCTORS_GET_All = 'doctors/get';
+const DOCTORS_GET_All = 'doctors/all/get';
 const CATEGORY_GET_ALL = 'catogrey/get';
 const HOSPITAL_GET_ALL = 'hospitals/get';
 const HOSPITAL_CATEGOREIES = 'hospitals/categories';
@@ -18,3 +18,6 @@ const BOOK_USER = 'book/user';
 const USER_LOGIN = 'user/login';
 const USER_PHONE = 'user/phone';
 const USER_NEW = 'user/new';
+
+const REGION_GET = 'regions/get';
+const INSURANCE_GET= 'insurances/get';

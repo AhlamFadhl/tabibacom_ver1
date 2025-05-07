@@ -5,6 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
+import 'package:tabibacom_ver1/screens/insurance_list/view/view.dart';
+import 'package:tabibacom_ver1/screens/region_list/view/view.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 
 class CategoryListPage extends StatelessWidget {
@@ -46,7 +48,7 @@ class CategoryListPage extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -79,7 +81,7 @@ class CategoryListPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   Get.to(
-                    DoctorListPage(),
+                    InsuranceListPage( cat: cat,),
                   );
                 },
               ),

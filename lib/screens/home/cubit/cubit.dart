@@ -12,25 +12,8 @@ class HomeCubit extends Cubit<HomeStates> {
 
   static HomeCubit get(context) => BlocProvider.of(context);
 
-  List<Doctor> list_doctors = [];
   List<CategoryDoc> list_category = [];
   List<Hospital> list_hospital = [];
-  getAllDoctors() {
-    list_doctors = [];
-    emit(HomeLoadingDoctorsState());
-    DioHelper.postData(
-      data: {},
-      url: DOCTORS_GET_All,
-    ).then((value) {
-      print(value);
-      List<dynamic> list = value.data;
-      list_doctors = list.map((json) => Doctor.fromJson(json)).toList();
-      emit(HomeGetDoctorsState());
-    }).catchError((error) {
-      print(error.toString());
-      emit(HomeErrorGetDoctorsState());
-    });
-  }
 
   getAllCategory() {
     list_category = [];
