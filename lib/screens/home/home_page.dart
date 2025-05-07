@@ -36,134 +36,9 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 120,
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'ابحث عن طبيبك',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Get.to(
-                                () => CategoryListPage(
-                                    list_category: cubit.list_category),
-                              );
-                            },
-                            child: Container(
-                              height: 50,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.shade300,
-                                      blurRadius: 1,
-                                      offset: Offset(0, 0),
-                                      spreadRadius: 0)
-                                ],
-                                color: Colors.white,
-                              ),
-                              child: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'ابحث',
-                                  ),
-                                  Icon(
-                                    Icons.search,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ////****************** /////
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      width: double.infinity,
-                      height: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl: '${PATH_IMG}cover.png',
-                        placeholder: (context, url) => Image.asset(
-                          'assets/images/cover.png',
-                          fit: BoxFit.cover,
-                        ),
-                        errorWidget: (context, url, error) => Image.asset(
-                          'assets/images/cover.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-
-                    ///  *******************///
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    //Categories
-                    /*
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                             const Text('العيادات'),
-                              TextButton(
-                                onPressed: () {
-                                  Get.to(
-                                    () => CategoryListPage(
-                                        list_category: cubit.list_category),
-                                  );
-                                },
-                                child: const Text(
-                                  'الكل',
-                                ),
-                              ),
-                            ],
-                          ),
-                         const SizedBox(
-                            height: 5,
-                          ),
-                          categoriesBuilder(
-                            categories: cubit.list_category,
-                          ),
-                        ],
-                      ),
-                    ),
-                   */
-                    ////******************** */
-                    ///
+                   
+                    
+                    
                     //Card Service
                     Container(
                         margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -223,6 +98,94 @@ class HomePage extends StatelessWidget {
                             ),
                           ],
                         )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ///Search Bar
+                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      height: 120,
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'ابحث عن طبيبك',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.to(
+                                () => CategoryListPage(
+                                    list_category: cubit.list_category),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.shade300,
+                                      blurRadius: 1,
+                                      offset: Offset(0, 0),
+                                      spreadRadius: 0)
+                                ],
+                                color: Colors.white,
+                              ),
+                              child: const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'ابحث',
+                                  ),
+                                  Icon(
+                                    Icons.search,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    //Cover Image
+                      Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      width: double.infinity,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl: '${PATH_IMG}cover.png',
+                        placeholder: (context, url) => Image.asset(
+                          'assets/images/cover.png',
+                          fit: BoxFit.cover,
+                        ),
+                        errorWidget: (context, url, error) => Image.asset(
+                          'assets/images/cover.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(
                       height: 10,
                     ),
@@ -330,6 +293,7 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
+                    
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       padding: const EdgeInsets.all(10),
