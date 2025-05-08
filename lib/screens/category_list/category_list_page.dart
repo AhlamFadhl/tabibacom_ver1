@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
+import 'package:tabibacom_ver1/screens/doctor_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/screens/insurance_list/view/view.dart';
 import 'package:tabibacom_ver1/screens/region_list/view/view.dart';
@@ -30,7 +31,7 @@ class CategoryListPage extends StatelessWidget {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) =>
-                      buildCategory(list_category[index]),
+                      buildCategory(list_category[index],context),
                   separatorBuilder: (context, index) => SizedBox(
                         height: 10,
                       ),
@@ -42,7 +43,7 @@ class CategoryListPage extends StatelessWidget {
     );
   }
 
-  buildCategory(CategoryDoc cat) => Container(
+  buildCategory(CategoryDoc cat, context) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
@@ -80,8 +81,9 @@ class CategoryListPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
+                  DoctorCubit.get(context).cat = cat;
                   Get.to(
-                    InsuranceListPage( cat: cat,),
+                    InsuranceListPage(),
                   );
                 },
               ),

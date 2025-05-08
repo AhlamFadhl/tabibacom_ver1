@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/insurance.dart';
+import 'package:tabibacom_ver1/models/region.dart';
+import 'package:tabibacom_ver1/screens/doctor_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/screens/region_list/cubit/cubit.dart';
 
 class RegionsPage extends StatelessWidget {
-  CategoryDoc? cat;
-  InsuranceModel? insurance;
-  RegionsPage({super.key, this.cat, this.insurance});
+  RegionsPage({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,9 @@ class RegionsPage extends StatelessWidget {
                 if (index == 0) {
                   return InkWell(
                     onTap: () {
+                       DoctorCubit.get(context).region = RegionModel(drct_id: 0,drct_name: 'عدن');
                       Get.to(DoctorListPage(
-                        cat: cat!,
-                        insurance: insurance,
+                   
                       ));
                     },
                     child: Container(
@@ -43,10 +43,9 @@ class RegionsPage extends StatelessWidget {
                 } else {
                   return InkWell(
                     onTap: () {
+                      DoctorCubit.get(context).region = cubit.list_region[index - 1];
                       Get.to(DoctorListPage(
-                        cat: cat!,
-                        insurance: insurance,
-                        region: cubit.list_region[index - 1],
+                       
                       ));
                     },
                     child: Container(

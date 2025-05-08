@@ -7,6 +7,7 @@ import 'package:tabibacom_ver1/models/hospital_model.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/screens/doctor_profile/doctor_profile.dart';
 import 'package:tabibacom_ver1/screens/hospital_profile/hospital_profile_page.dart';
+import 'package:tabibacom_ver1/screens/insurance_list/view/view.dart';
 import 'package:tabibacom_ver1/shared/components/constants.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
@@ -209,8 +210,8 @@ OutlineInputBorder errorBorderTextFeild() => OutlineInputBorder(
     ));
 Widget buildCategoryItem(CategoryDoc cat, context) => InkWell(
       onTap: () {
-        Get.to(() => DoctorListPage(
-              cat: cat,
+        Get.to(() => InsuranceListPage(
+        
             ));
       },
       child: Container(
