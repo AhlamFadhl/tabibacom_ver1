@@ -81,9 +81,9 @@ class CategoryListPage extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  DoctorCubit.get(context).cat = cat;
+                
                   Get.to(
-                    InsuranceListPage(),
+                    InsuranceListPage(cat: cat,),
                   );
                 },
               ),

@@ -21,3 +21,4 @@ const USER_NEW = 'user/new';
 
 const REGION_GET = 'regions/get';
 const INSURANCE_GET= 'insurances/get';
+const DOCTORS_FILTTER='doctors/filtter/get';

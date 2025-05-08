@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/hospital_types_model.dart';
 import 'package:tabibacom_ver1/models/insurance.dart';
 import 'package:tabibacom_ver1/models/region.dart';
@@ -14,102 +16,116 @@ import 'package:tabibacom_ver1/widgets/my_text_formfield_widget.dart';
 import 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 class DoctorListPage extends StatelessWidget {
-  DoctorListPage();
+  InsuranceModel insurance;
+  CategoryDoc cat;
+  RegionModel region;
+  DoctorListPage({
+    required this.insurance,
+    required this.cat,
+    required this.region,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DoctorCubit, DoctorStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        var cubit = DoctorCubit.get(context);
-        return Scaffold(
-          appBar: AppBar(title: Text('اطباء ' + cubit.cat!.cat_name)),
-          body: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyTextFormField(
-                  controller: cubit.controllerSearch,
-                  validator: (p0) {},
-                  suffexIcon: Icon(Icons.search),
-                  placeHolder: 'ابحث عن اسم الطبيب او المركز الطبي',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MyText(
-                  'تبحث في',
-                  fontSize: 12,
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Flexible(
-                      child: InkWell(
-                        onTap: () {
-                          showSheetRegion(context);
-                        },
-                        child: FiltterCard(
-                          title: (cubit.region!.drct_id ?? 0) == 0
-                              ? 'عدن'
-                              : cubit.region!.drct_name ?? '',
-                          isSearched: (cubit.region!.drct_id ?? 0) != 0,
+    return BlocProvider(
+      create: (context) =>
+          DoctorCubit(insurance: insurance, cat: cat, region: region)
+            ..getAllDoctorsByFiltter(),
+      child: BlocConsumer<DoctorCubit, DoctorStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = DoctorCubit.get(context);
+          return Scaffold(
+            appBar: AppBar(title: Text('اطباء ' + cubit.cat.cat_name)),
+            body: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyTextFormField(
+                    controller: cubit.controllerSearch,
+                    validator: (p0) {},
+                    suffexIcon: Icon(Icons.search),
+                    placeHolder: 'ابحث عن اسم الطبيب او المركز الطبي',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MyText(
+                    'تبحث في',
+                    fontSize: 12,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Flexible(
+                        child: InkWell(
+                          onTap: () {
+                            showSheetRegion(context,cubit);
+                          },
+                          child: FiltterCard(
+                            title: (cubit.region.drct_id ?? 0) == 0
+                                ? 'عدن'
+                                : cubit.region.drct_name ?? '',
+                            isSearched: (cubit.region.drct_id ?? 0) != 0,
+                          ),
                         ),
                       ),
-                    ),
-                    Flexible(
-                      child: InkWell(
-                        onTap: () {
-                          showSheetInsurance(context);
-                        },
-                        child: FiltterCard(
-                          title: (cubit.insurance!.ins_no ?? 0) == 0
-                              ? 'شركه التأمين'
-                              : cubit.insurance!.ins_name ?? '',
-                          isSearched: (cubit.insurance!.ins_no ?? 0) != 0,
+                      Flexible(
+                        child: InkWell(
+                          onTap: () {
+                            showSheetInsurance(context,cubit);
+                          },
+                          child: FiltterCard(
+                            title: (cubit.insurance.ins_no ?? 0) == 0
+                                ? 'شركه التأمين'
+                                : cubit.insurance.ins_name ?? '',
+                            isSearched: (cubit.insurance.ins_no ?? 0) != 0,
+                          ),
                         ),
                       ),
-                    ),
-                    Flexible(
-                      child: InkWell(
-                        onTap: () {
-                          showSheetType(context);
-                        },
-                        child: FiltterCard(
-                          title: (cubit.hospitalType != null
-                                      ? (cubit.hospitalType!.hstype_no)
-                                      : 0) ==
-                                  0
-                              ? 'نوع المنشأة'
-                              : cubit.hospitalType!.hstype_name,
-                          isSearched: (cubit.hospitalType != null
-                                  ? (cubit.hospitalType!.hstype_no)
-                                  : 0) !=
-                              0,
+                      Flexible(
+                        child: InkWell(
+                          onTap: () {
+                            showSheetType(context,cubit);
+                          },
+                          child: FiltterCard(
+                            title: cubit.hospitalType.hstype_no == 0
+                                ? 'نوع المنشأة'
+                                : cubit.hospitalType.hstype_name,
+                            isSearched: cubit.hospitalType.hstype_no != 0,
+                          ),
                         ),
                       ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Skeletonizer(
+                          containersColor: Colors.grey,
+                          enabled: cubit.isLoading,
+                          child: doctorsListBuilder(
+                              doctors: cubit.isLoading
+                                  ? cubit.list_fake_doctors
+                                  : cubit.list_doctors)),
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: doctorsListBuilder(doctors: cubit.list_doctors),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
-  showSheetRegion(context) => WoltModalSheet.show(
+  showSheetRegion(context,cubit) => WoltModalSheet.show(
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
@@ -124,7 +140,7 @@ class DoctorListPage extends StatelessWidget {
                 if (index == 0) {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).changeFiltterRegion(
+                      cubit.changeFiltterRegion(
                           RegionModel(drct_id: 0, drct_name: 'عدن'));
                       Navigator.of(bottomSheetContext).pop();
                     },
@@ -136,7 +152,7 @@ class DoctorListPage extends StatelessWidget {
                 } else {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).changeFiltterRegion(
+                      cubit.changeFiltterRegion(
                           RegionCubit.get(context).list_region[index - 1]);
                       Navigator.of(bottomSheetContext).pop();
                     },
@@ -159,7 +175,7 @@ class DoctorListPage extends StatelessWidget {
         ],
       );
 
-  showSheetInsurance(context) => WoltModalSheet.show(
+  showSheetInsurance(context,cubit) => WoltModalSheet.show(
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
@@ -174,7 +190,7 @@ class DoctorListPage extends StatelessWidget {
                 if (index == 0) {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).changeFiltterInsurance(
+                      cubit.changeFiltterInsurance(
                           InsuranceModel(ins_no: 0, ins_name: 'شركة التأمين'));
                       Navigator.of(bottomSheetContext).pop();
                     },
@@ -186,8 +202,9 @@ class DoctorListPage extends StatelessWidget {
                 } else {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).changeFiltterInsurance(
-                          InsuranceCubit.get(context).list_insurance[index - 1]);
+                      cubit.changeFiltterInsurance(
+                          InsuranceCubit.get(context)
+                              .list_insurance[index - 1]);
                       Navigator.of(bottomSheetContext).pop();
                     },
                     child: Padding(
@@ -209,7 +226,7 @@ class DoctorListPage extends StatelessWidget {
         ],
       );
 
-  showSheetType(context) => WoltModalSheet.show(
+  showSheetType(context,cubit) => WoltModalSheet.show(
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
@@ -224,8 +241,10 @@ class DoctorListPage extends StatelessWidget {
                 if (index == 0) {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).changeFiltterType(
-                          HospitalTypes(hstype_no: 0, hstype_name: 'نوع المنشأة',hstype_image: ''));
+                      cubit.changeFiltterType(HospitalTypes(
+                          hstype_no: 0,
+                          hstype_name: 'نوع المنشأة',
+                          hstype_image: ''));
                       Navigator.of(bottomSheetContext).pop();
                     },
                     child: Padding(
@@ -236,15 +255,15 @@ class DoctorListPage extends StatelessWidget {
                 } else {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).changeFiltterType(
-                          DoctorCubit.get(context).list_types[index - 1]);
+                      cubit.changeFiltterType(
+                          cubit.list_types[index - 1]);
                       Navigator.of(bottomSheetContext).pop();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(DoctorCubit.get(context)
-                              .list_types[index - 1]
-                              .hstype_name),
+                      child: Text(cubit
+                          .list_types[index - 1]
+                          .hstype_name),
                     ),
                   );
                 }
@@ -252,12 +271,9 @@ class DoctorListPage extends StatelessWidget {
               separatorBuilder: (context, index) => Divider(
                 color: Colors.grey.shade200,
               ),
-              itemCount:  DoctorCubit.get(context).list_types.length + 1,
+              itemCount: cubit.list_types.length + 1,
             ),
           ),
         ],
       );
-
-
-
 }

@@ -9,7 +9,8 @@ import 'package:tabibacom_ver1/screens/insurance_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/region_list/view/view.dart';
 
 class InsuranceListPage extends StatelessWidget {
-  InsuranceListPage();
+  CategoryDoc cat;
+  InsuranceListPage({required this.cat});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +29,12 @@ class InsuranceListPage extends StatelessWidget {
                 if (index == 0) {
                   return InkWell(
                     onTap: () {
-                       DoctorCubit.get(context).insurance =
-                         InsuranceModel(ins_no: 0,ins_name: '');
-                      Get.to(RegionsPage());
+                      Get.to(
+                        RegionsPage(
+                          insurance: InsuranceModel(ins_no: 0, ins_name: ''),
+                          cat: cat,
+                        ),
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),
@@ -41,10 +45,9 @@ class InsuranceListPage extends StatelessWidget {
                   // Return the insurance name from the list
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).insurance =
-                          cubit.list_insurance[index - 1];
                       Get.to(RegionsPage(
-                      ));
+                          insurance: cubit.list_insurance[index - 1],
+                          cat: cat));
                     },
                     child: Container(
                       padding: const EdgeInsets.all(20),

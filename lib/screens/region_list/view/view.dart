@@ -9,7 +9,9 @@ import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/screens/region_list/cubit/cubit.dart';
 
 class RegionsPage extends StatelessWidget {
-  RegionsPage({super.key,});
+  InsuranceModel insurance;
+  CategoryDoc cat;
+  RegionsPage({super.key, required this.insurance, required this.cat});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,10 @@ class RegionsPage extends StatelessWidget {
                 if (index == 0) {
                   return InkWell(
                     onTap: () {
-                       DoctorCubit.get(context).region = RegionModel(drct_id: 0,drct_name: 'عدن');
                       Get.to(DoctorListPage(
-                   
+                        cat: cat,
+                        insurance: insurance,
+                        region: RegionModel(drct_id: 0, drct_name: 'عدن'),
                       ));
                     },
                     child: Container(
@@ -43,9 +46,10 @@ class RegionsPage extends StatelessWidget {
                 } else {
                   return InkWell(
                     onTap: () {
-                      DoctorCubit.get(context).region = cubit.list_region[index - 1];
                       Get.to(DoctorListPage(
-                       
+                        cat: cat,
+                        insurance: insurance,
+                        region: cubit.list_region[index - 1],
                       ));
                     },
                     child: Container(

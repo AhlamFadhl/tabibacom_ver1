@@ -211,7 +211,7 @@ OutlineInputBorder errorBorderTextFeild() => OutlineInputBorder(
 Widget buildCategoryItem(CategoryDoc cat, context) => InkWell(
       onTap: () {
         Get.to(() => InsuranceListPage(
-        
+        cat: cat,
             ));
       },
       child: Container(
@@ -847,7 +847,8 @@ Widget doctorsListBuilder({
       condition: doctors.length > 0,
       builder: (context) => Container(
         child: ListView.separated(
-          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return buildDoctorItem_Main(doctors[index], false);
           },

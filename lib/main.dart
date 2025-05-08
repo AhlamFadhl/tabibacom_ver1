@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             ..getAllCategory()
             ..getAllHospital(),
         ),
-        BlocProvider(create: (context) => DoctorCubit()..getAllDoctors()),
+       // BlocProvider(create: (context) => DoctorCubit()),
         BlocProvider(
           create: (context) => RegionCubit()..getAllRegion(),
         ),

@@ -47,6 +47,7 @@ class DioHelper {
       'Content-Type': 'application/json',
     };
 
+print(data);
     return dio.post(
       url,
       queryParameters: query,
