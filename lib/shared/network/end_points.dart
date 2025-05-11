@@ -1,6 +1,7 @@
 
 const PATH_URL = 'https://tabibacom.com/app/v1/';
 const PATH_IMG = PATH_URL + 'images/';
+const PATH_IMG_GROUP = PATH_URL + 'images/group/';
 const LOGIN = 'user/login';
 const REGISTER = 'user/new';
 const DOCTORS_GET_All = 'doctors/all/get';
@@ -22,3 +23,4 @@ const USER_NEW = 'user/new';
 const REGION_GET = 'regions/get';
 const INSURANCE_GET= 'insurances/get';
 const DOCTORS_FILTTER='doctors/filtter/get';
+const HOSPITAL_DEPARTMENTS = 'hospital/departments';

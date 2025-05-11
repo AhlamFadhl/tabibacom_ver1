@@ -7,9 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/doctor_model.dart';
 import 'package:tabibacom_ver1/models/hospital_model.dart';
-import 'package:tabibacom_ver1/screens/hospital_profile/cubit/hospital_profile_cubit.dart';
-import 'package:tabibacom_ver1/shared/styles/colors.dart';
+import 'package:tabibacom_ver1/screens/hospital_profile/cubit/cubit.dart';
+import 'package:tabibacom_ver1/shared/network/end_points.dart';
 import 'package:tabibacom_ver1/shared/styles/styles.dart';
+import 'package:tabibacom_ver1/widgets/my_border.dart';
+import 'package:tabibacom_ver1/widgets/my_button.dart';
 
 class HospitalProfilePage extends StatelessWidget {
   Hospital hospital;
@@ -18,8 +20,9 @@ class HospitalProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          HospitalProfileCubit()..getAllCategories(hospital.hsptl_no),
+      create: (context) => HospitalProfileCubit()
+        ..getAllDepartments(hospital.hsptl_no)
+        ..getAllCategories(hospital.hsptl_no),
       child: BlocConsumer<HospitalProfileCubit, HospitalProfileState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -28,10 +31,12 @@ class HospitalProfilePage extends StatelessWidget {
             appBar: AppBar(
               title: Text(hospital.hsptl_name),
             ),
-            body: Container(
+            body: Padding(
+              padding: const EdgeInsets.all(20),
               child: SingleChildScrollView(
                 child: Column(mainAxisSize: MainAxisSize.max, children: [
-                  Container(
+                  MyBorder(
+                    radius: 10,
                     width: double.infinity,
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -42,17 +47,16 @@ class HospitalProfilePage extends StatelessWidget {
                           height: 10,
                         ),
                         Container(
-                          height: 100,
-                          width: 100,
+                          height: 120,
+                          width: 120,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: Colors.grey.shade300),
+                            color: Colors.white,
+                            shape: BoxShape.circle,
                           ),
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
-                            imageUrl: hospital.hsptl_logo ?? '',
+                            imageUrl: '$PATH_IMG${hospital.hsptl_logo ?? ''}',
                             placeholder: (context, url) => Container(),
                             errorWidget: (context, url, error) => Container(),
                           ),
@@ -73,77 +77,87 @@ class HospitalProfilePage extends StatelessWidget {
                         Text(
                           hospital.hsptl_address ?? '',
                           textAlign: TextAlign.center,
-                          style: styleText.copyWith(fontSize: 14),
+                          style: styleText.copyWith(
+                              fontSize: 14, color: Colors.grey.shade600),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        MyButton(title: 'احجز موعد الأن ', onTap: (){},width: MediaQuery.of(context).size.width*0.5,),
+                       
+                        Container(
+                          margin: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey.shade200,
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      // color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Column(children: [
+                                    Text(
+                                      'التخصصات',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 14),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      '2 تخصص',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                              SizedBox(height: 20, child: VerticalDivider()),
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      // color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Column(children: [
+                                    Text(
+                                      'الأطباء',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 14),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      '2 طبيب',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14),
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
-                  Row(
-                    children: [
-                      Spacer(),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            // color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.health_and_safety_rounded,
-                                color: primaryColor,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text('التخصصات'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            '2',
-                          ),
-                        ]),
-                      ),
-                      Spacer(),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            // color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.health_and_safety_rounded,
-                                color: primaryColor,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text('الأطباء'),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            '2',
-                          ),
-                        ]),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  Divider(),
-                  Container(
+                  MyBorder(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +166,7 @@ class HospitalProfilePage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          'نبذه عن ' + hospital.hsptl_name,
+                          'عن المركز ',
                           style: styleHeadline,
                         ),
                         SizedBox(
@@ -168,7 +182,75 @@ class HospitalProfilePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  ConditionalBuilder(
+                  SizedBox(
+                    height: 20,
+                  ),
+                  MyBorder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'اقسام المركز',
+                          style: styleHeadline,
+                        ),
+                        SizedBox(height: 20,),
+                        ConditionalBuilder(
+                            condition: cubit.list_departments.isNotEmpty,
+                            builder: (context) => GridView.builder(
+                              
+                              physics: NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, // 2 columns
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                ),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) => InkWell(
+                                  onTap: (){},
+                                  child: MyBorder(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Column(
+                                     mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            CachedNetworkImage(
+                                              imageUrl:
+                                                  '$PATH_IMG_GROUP${cubit.list_departments[index].dep_image}',
+                                              height: 35,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              cubit.list_departments[index]
+                                                      .dep_title ??
+                                                  '',
+                                            ), 
+                                             SizedBox(
+                                              height: 4,
+                                            ), Text(
+                                              cubit.list_departments[index]
+                                                      .dep_note ??
+                                                  '',
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(color: Colors.grey,fontSize: 12,),
+                                            ),
+                                          ],
+                                        ),
+                                  ),
+                                ),
+                                itemCount: cubit.list_departments.length),
+                            fallback: (context) => CircularProgressIndicator()),
+                    SizedBox(height: 20,),
+                      ],
+                    ),
+                  )
+                  /* ConditionalBuilder(
                       condition: state is HospitalProfileLoading,
                       builder: (context) => CircularProgressIndicator(),
                       fallback: (context) {
@@ -179,7 +261,7 @@ class HospitalProfilePage extends StatelessWidget {
                                 buildCategory(cubit.list_categories[index]),
                             separatorBuilder: (context, index) => Divider(),
                             itemCount: cubit.list_categories.length);
-                      }),
+                      }),*/
                 ]),
               ),
             ),

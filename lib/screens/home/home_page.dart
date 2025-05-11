@@ -8,7 +8,6 @@ import 'package:tabibacom_ver1/screens/home/cubit/states.dart';
 import 'package:tabibacom_ver1/screens/home/widgets/sercice_card.dart';
 import 'package:tabibacom_ver1/shared/components/components.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
-import 'package:tabibacom_ver1/shared/styles/styles.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -185,11 +184,12 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-
+   /*
                     const SizedBox(
                       height: 10,
                     ),
                     ///////
+                 
                     Container(
                       padding: const EdgeInsets.all(10),
                       margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -244,52 +244,8 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-
-                    ///**************************** */
-                    /* const SizedBox(
-                      height: 10,
-                    ),
-                    //Doctors
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'الأطباء',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Get.to(
-                                    DoctorListPage(),
-                                  );
-                                },
-                                child: const Text(
-                                  'الكل',
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          doctorsBuilder(
-                            doctors: cubit.list_doctors,
-                          ),
-                        ],
-                      ),
-                    ),
-                   */
-                    ////**************************************************** */
+*/
+                  
                     SizedBox(
                       height: 10,
                     ),

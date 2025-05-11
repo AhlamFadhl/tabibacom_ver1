@@ -3,7 +3,6 @@ class Doctors_Hospital {
   int doc_no;
   int doc_owner;
   dynamic doc_price;
-
   String doc_note;
   int doc_publish;
 

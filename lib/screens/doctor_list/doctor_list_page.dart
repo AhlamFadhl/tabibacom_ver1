@@ -129,6 +129,7 @@ class DoctorListPage extends StatelessWidget {
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
+            sabGradientColor: Colors.grey,
             backgroundColor: Colors.white,
             useSafeArea: true,
             topBarTitle: Text('اختر المنطقه'),
