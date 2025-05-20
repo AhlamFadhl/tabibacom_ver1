@@ -10,7 +10,7 @@ class SplashCubit extends Cubit<SplashStates> {
 
   getEnternetData() {
     emit(SplashLoadingEnternetState());
-    Future.delayed(Duration(seconds: 10)).then((value) {
+    Future.delayed(Duration(seconds: 5)).then((value) {
       emit(SplashNotEnternetState());
     });
   }

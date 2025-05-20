@@ -75,30 +75,7 @@ class SignInPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                      if (cubit.register == 2)
-                        Form(
-                          key: cubit.formKeyName,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'الاسم',
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              defaultFormField(
-                                controller: cubit.controllerName,
-                                type: TextInputType.name,
-                                validate: (value) {},
-                                hinttxt: 'ادخل اسمك',
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          ),
-                        ),
+                      
                       if (cubit.register != 0)
                         Form(
                           key: cubit.formKeyPass,

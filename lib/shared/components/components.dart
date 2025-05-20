@@ -1,11 +1,13 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/doctor_model.dart';
 import 'package:tabibacom_ver1/models/hospital_model.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/screens/doctor_profile/doctor_profile.dart';
+import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/hospital_profile/hospital_profile_page.dart';
 import 'package:tabibacom_ver1/screens/insurance_list/view/view.dart';
 import 'package:tabibacom_ver1/shared/components/constants.dart';
@@ -13,13 +15,15 @@ import 'package:tabibacom_ver1/shared/network/end_points.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
 import 'package:tabibacom_ver1/shared/styles/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:tabibacom_ver1/widgets/my_text.dart';
+import 'package:tabibacom_ver1/widgets/sized_box.dart';
 
 Widget defultIconButton(
         {required Function() onPressed, required IconData icon}) =>
     IconButton(
         icon: CircleAvatar(
           radius: 35,
-          backgroundColor: Colors.white.withOpacity(0.3),
+          backgroundColor: Colors.white.withValues(alpha:  0.3),
           child: Icon(
             icon,
             color: Colors.white,
@@ -115,7 +119,7 @@ Widget defaultTextButton({
 Widget defaultCardSearch() => Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha:  0.2),
         borderRadius: BorderRadiusDirectional.circular(10),
       ),
       child: Row(
@@ -136,7 +140,7 @@ Widget defaultCardSearch() => Container(
 Widget defaultBarcode() => Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha:  0.2),
         borderRadius: BorderRadiusDirectional.circular(10),
       ),
       child: Icon(Icons.code),
@@ -212,6 +216,7 @@ Widget buildCategoryItem(CategoryDoc cat, context) => InkWell(
       onTap: () {
         Get.to(() => InsuranceListPage(
         cat: cat,
+        list_insurance: HomeCubit.get(context).list_insurance,
             ));
       },
       child: Container(
@@ -291,7 +296,7 @@ Widget buildDoctorItem(Doctor doc, context) => InkWell(
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: primaryColor.withOpacity(0.5),
+                    color: primaryColor.withValues(alpha:  0.5),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(5),
                       bottomRight: Radius.circular(5),
@@ -401,18 +406,18 @@ Widget buildHospitalItem(Hospital hsptl, context) => InkWell(
         Get.to(() => HospitalProfilePage(hospital: hsptl));
       },
       child: Container(
-        height: 150,
+
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: primaryColor.withOpacity(0.2),
+          color: primaryColor.withValues(alpha:  0.2),
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 60,
-              width: 60,
+              height: 60.r,
+              width: 60.r,
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(50.0),
@@ -425,15 +430,16 @@ Widget buildHospitalItem(Hospital hsptl, context) => InkWell(
                 errorWidget: (context, url, error) => Container(),
               ),
             ),
-            SizedBox(
+            CustomSizedBox (
               height: 8.0,
             ),
             Container(
-              width: 100,
+              width: 100.r,
               padding: const EdgeInsets.only(right: 5),
-              child: Text(
+              child: MyText(
                 hsptl.hsptl_name,
                 textAlign: TextAlign.center,
+                fontSize: 12,
               ),
             ),
           ],
@@ -467,8 +473,8 @@ Widget categoriesBuilder({
 Widget hospitalsBuilder({
   required List<Hospital> hospitals,
 }) =>
-    Container(
-      height: 150,
+    SizedBox (
+    height: 170.r,
       child: ConditionalBuilder(
         condition: hospitals.length > 0,
         builder: (context) => Container(
@@ -1249,16 +1255,16 @@ buildProfileImage({
 }) =>
     CircleAvatar(
       radius: radius,
-      backgroundColor: lightColor.withOpacity(0.3),
+      backgroundColor: lightColor.withValues(alpha:  0.3),
       child: CircleAvatar(
-        backgroundColor: Colors.white.withOpacity(0.5),
+        backgroundColor: Colors.white.withValues(alpha:  0.5),
         radius: radius - 5,
         backgroundImage: NetworkImage(
           url,
         ),
         child: CircleAvatar(
           radius: radius - 10,
-          backgroundColor: Colors.black45.withOpacity(0.1),
+          backgroundColor: Colors.black45.withValues(alpha:  0.1),
         ),
       ),
     );

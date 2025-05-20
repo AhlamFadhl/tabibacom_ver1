@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/doctor_model.dart';
 import 'package:tabibacom_ver1/models/hospital_model.dart';
+import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
+import 'package:tabibacom_ver1/screens/hospital_doctors/view.dart';
 import 'package:tabibacom_ver1/screens/hospital_profile/cubit/cubit.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 import 'package:tabibacom_ver1/shared/styles/styles.dart';
@@ -22,7 +25,8 @@ class HospitalProfilePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => HospitalProfileCubit()
         ..getAllDepartments(hospital.hsptl_no)
-        ..getAllCategories(hospital.hsptl_no),
+        ..getAllCategories(hospital.hsptl_no)
+        ..getAllInsurance(hospital.hsptl_no),
       child: BlocConsumer<HospitalProfileCubit, HospitalProfileState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -55,6 +59,7 @@ class HospitalProfilePage extends StatelessWidget {
                           ),
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           child: CachedNetworkImage(
+                            width: double.infinity,
                             fit: BoxFit.cover,
                             imageUrl: '$PATH_IMG${hospital.hsptl_logo ?? ''}',
                             placeholder: (context, url) => Container(),
@@ -85,8 +90,17 @@ class HospitalProfilePage extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        MyButton(title: 'احجز موعد الأن ', onTap: (){},width: MediaQuery.of(context).size.width*0.5,),
-                       
+                        MyButton(
+                          title: 'احجز موعد الأن ',
+                          onTap: () {
+                            Get.to(HospitalDoctorsPage(
+                              hospital: hospital,
+                              listCats: cubit.list_categories,
+                              listIns: cubit.list_insurance,
+                            ));
+                          },
+                          width: MediaQuery.of(context).size.width * 0.5,
+                        ),
                         Container(
                           margin: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
@@ -113,7 +127,7 @@ class HospitalProfilePage extends StatelessWidget {
                                       height: 5,
                                     ),
                                     Text(
-                                      '2 تخصص',
+                                      '${hospital.count_cat} تخصص',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14),
@@ -140,7 +154,7 @@ class HospitalProfilePage extends StatelessWidget {
                                       height: 5,
                                     ),
                                     Text(
-                                      '2 طبيب',
+                                      '${hospital.count_doc} طبيب',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14),
@@ -166,7 +180,7 @@ class HospitalProfilePage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          'عن المركز ',
+                          'عن ال${hospital.hstype_name} ',
                           style: styleHeadline,
                         ),
                         SizedBox(
@@ -194,15 +208,16 @@ class HospitalProfilePage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          'اقسام المركز',
+                          'اقسام ال${hospital.hstype_name}',
                           style: styleHeadline,
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(
+                          height: 20,
+                        ),
                         ConditionalBuilder(
                             condition: cubit.list_departments.isNotEmpty,
                             builder: (context) => GridView.builder(
-                              
-                              physics: NeverScrollableScrollPhysics(),
+                                physics: NeverScrollableScrollPhysics(),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2, // 2 columns
@@ -211,11 +226,12 @@ class HospitalProfilePage extends StatelessWidget {
                                 ),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) => InkWell(
-                                  onTap: (){},
-                                  child: MyBorder(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Column(
-                                     mainAxisAlignment: MainAxisAlignment.center,
+                                      onTap: () {},
+                                      child: MyBorder(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             CachedNetworkImage(
                                               imageUrl:
@@ -229,24 +245,31 @@ class HospitalProfilePage extends StatelessWidget {
                                               cubit.list_departments[index]
                                                       .dep_title ??
                                                   '',
-                                            ), 
-                                             SizedBox(
+                                            ),
+                                            SizedBox(
                                               height: 4,
-                                            ), Text(
+                                            ),
+                                            Text(
                                               cubit.list_departments[index]
                                                       .dep_note ??
                                                   '',
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: TextStyle(color: Colors.grey,fontSize: 12,),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 12,
+                                              ),
                                             ),
                                           ],
                                         ),
-                                  ),
-                                ),
+                                      ),
+                                    ),
                                 itemCount: cubit.list_departments.length),
-                            fallback: (context) => CircularProgressIndicator()),
-                    SizedBox(height: 20,),
+                            fallback: (context) =>
+                                Center(child: CircularProgressIndicator())),
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   )

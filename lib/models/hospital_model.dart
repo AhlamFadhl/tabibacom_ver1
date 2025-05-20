@@ -15,6 +15,10 @@ class Hospital {
   String hsptl_date_joined;
   int hsptl_type;
 
+  String? hstype_name;
+  int? count_doc;
+  int? count_cat;
+
   Hospital({
     required this.hsptl_no,
     required this.hsptl_name,
@@ -31,6 +35,9 @@ class Hospital {
     this.hsptl_phone_other,
     required this.hsptl_date_joined,
     required this.hsptl_type,
+    this.hstype_name,
+    this.count_doc,
+    this.count_cat,
   });
   factory Hospital.fromJson(Map<String, dynamic> json) {
     return Hospital(
@@ -49,6 +56,9 @@ class Hospital {
       hsptl_phone_other: json['hsptl_phone_other'],
       hsptl_date_joined: json['hsptl_date_joined'],
       hsptl_type: json['hsptl_type'],
+      hstype_name: json.containsKey('hstype_name') ? json['hstype_name'] : '',
+      count_doc: json.containsKey('count_doc') ? json['count_doc'] : 0,
+      count_cat: json.containsKey('count_cat') ? json['count_cat'] : 0,
     );
   }
 

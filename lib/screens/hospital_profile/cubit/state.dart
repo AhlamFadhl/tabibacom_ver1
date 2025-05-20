@@ -15,3 +15,9 @@ class HospitalCategoryLoading extends HospitalProfileState {}
 class HospitalCategoryGet extends HospitalProfileState {}
 
 class HospitalCategoryError extends HospitalProfileState {}
+
+class HospitalInsuranceLoading extends HospitalProfileState {}
+
+class HospitalInsuranceGet extends HospitalProfileState {}
+
+class HospitalInsuranceError extends HospitalProfileState {}

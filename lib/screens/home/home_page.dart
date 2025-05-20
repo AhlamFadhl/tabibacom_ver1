@@ -8,6 +8,8 @@ import 'package:tabibacom_ver1/screens/home/cubit/states.dart';
 import 'package:tabibacom_ver1/screens/home/widgets/sercice_card.dart';
 import 'package:tabibacom_ver1/shared/components/components.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
+import 'package:tabibacom_ver1/widgets/my_text.dart';
+import 'package:tabibacom_ver1/widgets/sized_box.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -25,14 +27,14 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    CustomSizedBox(
                       height: 4,
                     ),
                     Image.asset(
                       'assets/images/logo_h.png',
                       height: 50,
                     ),
-                    SizedBox(
+                    CustomSizedBox(
                       height: 10,
                     ),
                    
@@ -59,7 +61,7 @@ class HomePage extends StatelessWidget {
                                     );
                                   },
                                   child: ServiceCard(
-                                      title: ' معاينه قي العياده',
+                                      title: ' معاينه في العياده',
                                       image:
                                           'assets/images/img_doctor_book.png'),
                                 )),
@@ -97,13 +99,13 @@ class HomePage extends StatelessWidget {
                             ),
                           ],
                         )),
-                    const SizedBox(
+                    const CustomSizedBox(
                       height: 10,
                     ),
                     ///Search Bar
                      Container(
                       margin: const EdgeInsets.symmetric(horizontal: 10),
-                      height: 120,
+                   
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -112,11 +114,12 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          const MyText(
                             'ابحث عن طبيبك',
-                            style: TextStyle(fontSize: 16),
+                            fontSize: 16,
+                           
                           ),
-                          const SizedBox(
+                          const CustomSizedBox(
                             height: 5,
                           ),
                           InkWell(
@@ -127,7 +130,7 @@ class HomePage extends StatelessWidget {
                               );
                             },
                             child: Container(
-                              height: 50,
+                              height:60,
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 10),
                               decoration: BoxDecoration(
@@ -147,6 +150,10 @@ class HomePage extends StatelessWidget {
                                 children: [
                                   Text(
                                     'ابحث',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 14.0,
+                                    ),
                                   ),
                                   Icon(
                                     Icons.search,
@@ -158,7 +165,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    const CustomSizedBox(
                       height: 10,
                     ),
                     //Cover Image
@@ -184,69 +191,7 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-   /*
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ///////
-                 
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      width: double.infinity,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            'assets/images/question.png',
-                            width: 30,
-                            height: 30,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'لديك سؤال لطبيبكم؟',
-                                  style: styleTextB,
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  'اسأل طبيبكم مجاناً ... سيتم الإجابة في اقرب فرصة',
-                                  style: styleText,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'اسأل',
-                              style: styleText_mini_colored,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-*/
-                  
-                    SizedBox(
+                    CustomSizedBox(
                       height: 10,
                     ),
                     
@@ -262,20 +207,21 @@ class HomePage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              MyText(
                                 'المستشفيات والمراكز الصحيه',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              
                               ),
                               /*TextButton(
                                 onPressed: () {},
-                                child: Text(
+                                child: MyText(
                                   'الكل',
                                 ),
                               ),*/
                             ],
                           ),
-                          SizedBox(
+                          CustomSizedBox(
                             height: 10,
                           ),
                           hospitalsBuilder(
@@ -284,7 +230,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    CustomSizedBox(
                       height: 10,
                     ),
                   ],

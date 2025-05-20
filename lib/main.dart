@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:tabibacom_ver1/screens/doctor_list/cubit/cubit.dart';
+import 'package:tabibacom_ver1/models/city.dart';
 import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
-import 'package:tabibacom_ver1/screens/insurance_list/cubit/cubit.dart';
-import 'package:tabibacom_ver1/screens/region_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/splash/splash_page.dart';
 import 'package:tabibacom_ver1/shared/cubit/cubit.dart';
 import 'package:tabibacom_ver1/shared/cubit/states.dart';
@@ -36,36 +35,36 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeCubit()
-            //  ..getAllDoctors()
+            ..getAllRegion(CityModel(cty_id: 1, cty_name: 'عدن'))
             ..getAllCategory()
+            ..getAllInsurance()
             ..getAllHospital(),
         ),
-       // BlocProvider(create: (context) => DoctorCubit()),
-        BlocProvider(
-          create: (context) => RegionCubit()..getAllRegion(),
-        ),
-        BlocProvider(
-          create: (context) => InsuranceCubit()..getAllInsurance(),
-        ),
+        // BlocProvider(create: (context) => DoctorCubit()),
       ],
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return GetMaterialApp(
-            title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
-            theme: lightTheme,
-            locale: const Locale('ar'),
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale('ar', 'YE'), // Arabic
-              Locale('en', 'US'), // English
-            ],
-            home: SplashPage(),
+          return ScreenUtilInit(
+            designSize: const Size(375, 812),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            child: GetMaterialApp(
+              title: 'Flutter Demo',
+              debugShowCheckedModeBanner: false,
+              theme: lightTheme,
+              locale: const Locale('ar'),
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: [
+                Locale('ar', 'YE'), // Arabic
+                Locale('en', 'US'), // English
+              ],
+              home: SplashPage(),
+            ),
           );
         },
       ),

@@ -1,13 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
-import 'package:tabibacom_ver1/screens/doctor_list/cubit/cubit.dart';
-import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
+import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/insurance_list/view/view.dart';
-import 'package:tabibacom_ver1/screens/region_list/view/view.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 
 class CategoryListPage extends StatelessWidget {
@@ -83,7 +79,7 @@ class CategoryListPage extends StatelessWidget {
                 onPressed: () {
                 
                   Get.to(
-                    InsuranceListPage(cat: cat,),
+                    InsuranceListPage(cat: cat,list_insurance: HomeCubit.get(context).list_insurance,),
                   );
                 },
               ),

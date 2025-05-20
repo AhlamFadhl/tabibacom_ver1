@@ -19,3 +19,10 @@ class HomeLoadingHospitalState extends HomeStates {}
 class HomeGetHospitalState extends HomeStates {}
 
 class HomeErrorGetHospitalState extends HomeStates {}
+class HomeInsuranceLoading extends HomeStates{}
+
+class HomeInsuranceGet extends HomeStates{}
+class HomeInsuranceError extends HomeStates{}
+class HomeRegionLoading extends HomeStates{}
+class HomeRegionGet extends HomeStates{}
+class HomeRegionError extends HomeStates{}

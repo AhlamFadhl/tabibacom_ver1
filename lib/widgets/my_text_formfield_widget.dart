@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
+import 'package:tabibacom_ver1/widgets/sized_box.dart';
 
 class MyTextFormField extends StatefulWidget {
   const MyTextFormField(
@@ -49,7 +51,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         // decoration: BoxDecoration(
         //   boxShadow: [
         //     BoxShadow(
-        //       color: Colors.grey.withOpacity(0.4),
+        //       color: Colors.grey.withValues(alpha: 0.4),
         //       blurRadius: 5,
         //       offset: const Offset(0, 0),
         //       spreadRadius: 0,
@@ -83,7 +85,7 @@ onChanged: widget.onChanged,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.withOpacity(0.3)),
+              borderSide: BorderSide(color: Colors.grey.withValues(alpha:  0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
@@ -91,7 +93,7 @@ onChanged: widget.onChanged,
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-               borderSide: BorderSide(color: Colors.grey.withOpacity(0.3)),
+               borderSide: BorderSide(color: Colors.grey.withValues(alpha:  0.3)),
             
             ),
             errorBorder: OutlineInputBorder(
@@ -106,7 +108,7 @@ onChanged: widget.onChanged,
             // label: Text(
             //   widget.placeHolder,
             //   style: TextStyle(
-            //     color: const Color(0xff1F1F1F).withOpacity(0.4),
+            //     color: const Color(0xff1F1F1F).withValues(alpha: 0.4),
             //     fontSize: 12,
             //   ),
             //   textDirection: widget.placeholderDirection,
@@ -114,8 +116,8 @@ onChanged: widget.onChanged,
             // labelText: widget.placeHolder,
             hintText: widget.placeHolder,
             hintStyle: TextStyle(
-                color: const Color(0xff1F1F1F).withOpacity(0.4),
-                fontSize: 14,
+                color: const Color(0xff1F1F1F).withValues(alpha: 0.4),
+                fontSize: 14.r,
                 fontWeight: FontWeight.bold),
             hintTextDirection: widget.placeholderDirection,
 
@@ -195,7 +197,7 @@ class MyTextFormFieldWithLabel extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(
+        const CustomSizedBox(
           height: 12,
         ),
         MyTextFormField(

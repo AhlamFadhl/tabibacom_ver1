@@ -8,8 +8,7 @@ import 'package:tabibacom_ver1/models/region.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/cubit/states.dart';
 import 'package:tabibacom_ver1/screens/doctor_list/widget/filtter_card.dart';
-import 'package:tabibacom_ver1/screens/insurance_list/cubit/cubit.dart';
-import 'package:tabibacom_ver1/screens/region_list/cubit/cubit.dart';
+import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
 import 'package:tabibacom_ver1/shared/components/components.dart';
 import 'package:tabibacom_ver1/widgets/my_text.dart';
 import 'package:tabibacom_ver1/widgets/my_text_formfield_widget.dart';
@@ -154,13 +153,13 @@ class DoctorListPage extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       cubit.changeFiltterRegion(
-                          RegionCubit.get(context).list_region[index - 1]);
+                          HomeCubit.get(context).list_region[index]);
                       Navigator.of(bottomSheetContext).pop();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(RegionCubit.get(context)
-                              .list_region[index - 1]
+                      child: Text(HomeCubit.get(context)
+                              .list_region[index]
                               .drct_name ??
                           ''),
                     ),
@@ -170,7 +169,7 @@ class DoctorListPage extends StatelessWidget {
               separatorBuilder: (context, index) => Divider(
                 color: Colors.grey.shade200,
               ),
-              itemCount: RegionCubit.get(context).list_region.length + 1,
+              itemCount: HomeCubit.get(context).list_region.length,
             ),
           ),
         ],
@@ -187,41 +186,27 @@ class DoctorListPage extends StatelessWidget {
             enableDrag: true,
             child: ListView.separated(
               shrinkWrap: true,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return InkWell(
+              itemBuilder: (context, index) =>  InkWell(
                     onTap: () {
                       cubit.changeFiltterInsurance(
-                          InsuranceModel(ins_no: 0, ins_name: 'شركة التأمين'));
+                          HomeCubit.get(context)
+                              .list_insurance[index]);
                       Navigator.of(bottomSheetContext).pop();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text('الكل'),
-                    ),
-                  );
-                } else {
-                  return InkWell(
-                    onTap: () {
-                      cubit.changeFiltterInsurance(
-                          InsuranceCubit.get(context)
-                              .list_insurance[index - 1]);
-                      Navigator.of(bottomSheetContext).pop();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(InsuranceCubit.get(context)
-                              .list_insurance[index - 1]
+                      child: Text(HomeCubit.get(context)
+                              .list_insurance[index ]
                               .ins_name ??
                           ''),
                     ),
-                  );
-                }
-              },
+                  )
+                
+              ,
               separatorBuilder: (context, index) => Divider(
                 color: Colors.grey.shade200,
               ),
-              itemCount: InsuranceCubit.get(context).list_insurance.length + 1,
+              itemCount: HomeCubit.get(context).list_insurance.length ,
             ),
           ),
         ],
