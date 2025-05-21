@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
-import 'package:tabibacom_ver1/models/doctors_hospital_model.dart';
-import 'package:tabibacom_ver1/models/doctor_model.dart';
-import 'package:tabibacom_ver1/models/hospital_model.dart';
 import 'package:tabibacom_ver1/shared/network/local/cache_helper.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
 

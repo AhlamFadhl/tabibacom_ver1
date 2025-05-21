@@ -8,7 +8,6 @@ import 'package:tabibacom_ver1/models/book_model.dart';
 import 'package:tabibacom_ver1/screens/my_transactions/cubit/my_transaction_cubit.dart';
 import 'package:tabibacom_ver1/screens/signin/signin_page.dart';
 import 'package:tabibacom_ver1/shared/components/components.dart';
-import 'package:tabibacom_ver1/shared/components/custom_image.dart';
 import 'package:tabibacom_ver1/shared/cubit/cubit.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
 import 'package:tabibacom_ver1/shared/styles/styles.dart';

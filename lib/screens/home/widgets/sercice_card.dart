@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tabibacom_ver1/widgets/my_border.dart';
 import 'package:tabibacom_ver1/widgets/my_text.dart';
 import 'package:tabibacom_ver1/widgets/sized_box.dart';

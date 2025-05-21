@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
@@ -138,7 +137,7 @@ class DoctorCubit extends Cubit<DoctorStates> {
     ).then((value) {
       isLoading = false;
       print(value);
-      List<dynamic> list = value.data;
+    //  List<dynamic> list = value.data;
 
       /// list_doctors = list.map((json) => Doctor.fromJson(json)).toList();
       emit(DoctorGetSucessState());
@@ -159,7 +158,7 @@ class DoctorCubit extends Cubit<DoctorStates> {
     ).then((value) {
       isLoading = false;
       print(value);
-      List<dynamic> list = value.data;
+      //List<dynamic> list = value.data;
       // list_doctors = list.map((json) => Doctor.fromJson(json)).toList();
       emit(DoctorGetSucessState());
     }).catchError((error) {

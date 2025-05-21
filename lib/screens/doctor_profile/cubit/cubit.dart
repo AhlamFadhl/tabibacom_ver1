@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:tabibacom_ver1/models/appointment_details_model.dart';
-import 'package:tabibacom_ver1/models/appointment_model.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 import 'package:tabibacom_ver1/shared/network/remote/dio_helper.dart';
 

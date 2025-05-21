@@ -1,6 +1,5 @@
 part of 'cubit.dart';
 
-@immutable
 sealed class HospitalDoctorsState {}
 
 final class HospitalDoctorsInitial extends HospitalDoctorsState {}

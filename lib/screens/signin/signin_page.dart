@@ -1,7 +1,5 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tabibacom_ver1/models/users_model.dart';
 import 'package:tabibacom_ver1/screens/signin/cubit/cubit.dart';

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tabibacom_ver1/models/users_model.dart';
 import 'package:tabibacom_ver1/screens/home/home_page.dart';
 import 'package:tabibacom_ver1/screens/my_transactions/my_transactions_page.dart';
 import 'package:tabibacom_ver1/screens/settings/settings_page.dart';

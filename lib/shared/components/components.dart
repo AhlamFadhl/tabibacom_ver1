@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/doctor_model.dart';
 import 'package:tabibacom_ver1/models/hospital_model.dart';
-import 'package:tabibacom_ver1/screens/doctor_list/doctor_list_page.dart';
 import 'package:tabibacom_ver1/screens/doctor_profile/doctor_profile.dart';
 import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/hospital_profile/hospital_profile_page.dart';
