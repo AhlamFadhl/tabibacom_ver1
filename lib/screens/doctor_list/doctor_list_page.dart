@@ -44,8 +44,18 @@ class DoctorListPage extends StatelessWidget {
                   MyTextFormField(
                     controller: cubit.controllerSearch,
                     validator: (p0) {},
-                    suffexIcon: Icon(Icons.search),
+                    suffexIcon: cubit.isLoading
+                        ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                            ))
+                        : Icon(Icons.search),
                     placeHolder: 'ابحث عن اسم الطبيب او المركز الطبي',
+                   suffexIconFunction: () {
+                        cubit.getAllDoctorsByFiltter();
+                   },
                   ),
                   const SizedBox(
                     height: 10,
@@ -63,7 +73,7 @@ class DoctorListPage extends StatelessWidget {
                       Flexible(
                         child: InkWell(
                           onTap: () {
-                            showSheetRegion(context,cubit);
+                            showSheetRegion(context, cubit);
                           },
                           child: FiltterCard(
                             title: (cubit.region.drct_id ?? 0) == 0
@@ -76,7 +86,7 @@ class DoctorListPage extends StatelessWidget {
                       Flexible(
                         child: InkWell(
                           onTap: () {
-                            showSheetInsurance(context,cubit);
+                            showSheetInsurance(context, cubit);
                           },
                           child: FiltterCard(
                             title: (cubit.insurance.ins_no ?? 0) == 0
@@ -89,7 +99,7 @@ class DoctorListPage extends StatelessWidget {
                       Flexible(
                         child: InkWell(
                           onTap: () {
-                            showSheetType(context,cubit);
+                            showSheetType(context, cubit);
                           },
                           child: FiltterCard(
                             title: cubit.hospitalType.hstype_no == 0
@@ -124,7 +134,7 @@ class DoctorListPage extends StatelessWidget {
     );
   }
 
-  showSheetRegion(context,cubit) => WoltModalSheet.show(
+  showSheetRegion(context, cubit) => WoltModalSheet.show(
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
@@ -158,10 +168,9 @@ class DoctorListPage extends StatelessWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(HomeCubit.get(context)
-                              .list_region[index]
-                              .drct_name ??
-                          ''),
+                      child: Text(
+                          HomeCubit.get(context).list_region[index].drct_name ??
+                              ''),
                     ),
                   );
                 }
@@ -175,7 +184,7 @@ class DoctorListPage extends StatelessWidget {
         ],
       );
 
-  showSheetInsurance(context,cubit) => WoltModalSheet.show(
+  showSheetInsurance(context, cubit) => WoltModalSheet.show(
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
@@ -186,33 +195,29 @@ class DoctorListPage extends StatelessWidget {
             enableDrag: true,
             child: ListView.separated(
               shrinkWrap: true,
-              itemBuilder: (context, index) =>  InkWell(
-                    onTap: () {
-                      cubit.changeFiltterInsurance(
-                          HomeCubit.get(context)
-                              .list_insurance[index]);
-                      Navigator.of(bottomSheetContext).pop();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(HomeCubit.get(context)
-                              .list_insurance[index ]
-                              .ins_name ??
+              itemBuilder: (context, index) => InkWell(
+                onTap: () {
+                  cubit.changeFiltterInsurance(
+                      HomeCubit.get(context).list_insurance[index]);
+                  Navigator.of(bottomSheetContext).pop();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                      HomeCubit.get(context).list_insurance[index].ins_name ??
                           ''),
-                    ),
-                  )
-                
-              ,
+                ),
+              ),
               separatorBuilder: (context, index) => Divider(
                 color: Colors.grey.shade200,
               ),
-              itemCount: HomeCubit.get(context).list_insurance.length ,
+              itemCount: HomeCubit.get(context).list_insurance.length,
             ),
           ),
         ],
       );
 
-  showSheetType(context,cubit) => WoltModalSheet.show(
+  showSheetType(context, cubit) => WoltModalSheet.show(
         context: context,
         pageListBuilder: (bottomSheetContext) => [
           WoltModalSheetPage(
@@ -241,15 +246,12 @@ class DoctorListPage extends StatelessWidget {
                 } else {
                   return InkWell(
                     onTap: () {
-                      cubit.changeFiltterType(
-                          cubit.list_types[index - 1]);
+                      cubit.changeFiltterType(cubit.list_types[index - 1]);
                       Navigator.of(bottomSheetContext).pop();
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(cubit
-                          .list_types[index - 1]
-                          .hstype_name),
+                      child: Text(cubit.list_types[index - 1].hstype_name),
                     ),
                   );
                 }

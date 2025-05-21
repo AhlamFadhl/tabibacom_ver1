@@ -1,26 +1,26 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
 import 'package:tabibacom_ver1/widgets/sized_box.dart';
 
 class MyTextFormField extends StatefulWidget {
-  const MyTextFormField(
-      {super.key,
-      required this.controller,
-      required this.validator,
-      required this.placeHolder,
-      this.suffexIcon,
-      this.prefexIcon,
-      this.obscure = false,
-      this.keyboardType = TextInputType.text,
-      this.enabled = true,
-      this.textDirection = TextDirection.rtl,
-      this.placeholderDirection = TextDirection.rtl,
-      this.suffexIconFunction,
-      this.maxLines,
-      this.backgroundColor=Colors.white,
-     this.onChanged,});
+  const MyTextFormField({
+    super.key,
+    required this.controller,
+    required this.validator,
+    required this.placeHolder,
+    this.suffexIcon,
+    this.prefexIcon,
+    this.obscure = false,
+    this.keyboardType = TextInputType.text,
+    this.enabled = true,
+    this.textDirection = TextDirection.rtl,
+    this.placeholderDirection = TextDirection.rtl,
+    this.suffexIconFunction,
+    this.maxLines,
+    this.backgroundColor = Colors.white,
+    this.onChanged,
+  });
   final String placeHolder;
   final TextEditingController controller;
   final String? Function(String?)? validator;
@@ -66,7 +66,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
           style: const TextStyle(
             color: Colors.black,
           ),
-onChanged: widget.onChanged,
+          onChanged: widget.onChanged,
           enabled: widget.enabled,
           obscureText: widget.obscure ? !showPassword : false,
           // obscureText: widget.obscure ? !showPassword : false,
@@ -85,7 +85,7 @@ onChanged: widget.onChanged,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(color: Colors.grey.withValues(alpha:  0.3)),
+              borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
@@ -93,8 +93,7 @@ onChanged: widget.onChanged,
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-               borderSide: BorderSide(color: Colors.grey.withValues(alpha:  0.3)),
-            
+              borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.3)),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
@@ -102,9 +101,9 @@ onChanged: widget.onChanged,
             ),
             filled: true,
             fillColor: widget.backgroundColor,
-               // ? Colors.white
-               // :Colors.grey[100],
-                // const Color.fromARGB(255, 223, 223, 223),
+            // ? Colors.white
+            // :Colors.grey[100],
+            // const Color.fromARGB(255, 223, 223, 223),
             // label: Text(
             //   widget.placeHolder,
             //   style: TextStyle(
@@ -125,14 +124,12 @@ onChanged: widget.onChanged,
             suffixIcon: widget.suffexIcon != null
                 ? IconButton(
                     padding: const EdgeInsets.all(8),
-                    onPressed: () {
-                      if (widget.obscure) {
-                        showPassword = !showPassword;
-                        setState(() {});
-                      } else {
-                        widget.suffexIconFunction;
-                      }
-                    },
+                    onPressed: widget.obscure
+                        ? () {
+                            showPassword = !showPassword;
+                            setState(() {});
+                          }
+                        : widget.suffexIconFunction,
                     icon: widget.suffexIcon!)
                 : null,
             prefixIcon: widget.prefexIcon,
@@ -160,7 +157,9 @@ class MyTextFormFieldWithLabel extends StatelessWidget {
       this.enabled = true,
       this.textDirection = TextDirection.rtl,
       this.suffexIconFunction,
-      this.maxLines,this.backgroundColor=Colors.white,this.smallLabel});
+      this.maxLines,
+      this.backgroundColor = Colors.white,
+      this.smallLabel});
   final String label;
   final String placeHolder;
   final TextEditingController controller;
@@ -189,11 +188,17 @@ class MyTextFormFieldWithLabel extends StatelessWidget {
             children: [
               Text(
                 mandatory ? '$label *' : label,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.start,
               ),
-              if(smallLabel!=null) Text(smallLabel??'', style: const TextStyle(fontSize: 10, fontWeight: FontWeight.normal),
-                textAlign: TextAlign.start,),
+              if (smallLabel != null)
+                Text(
+                  smallLabel ?? '',
+                  style: const TextStyle(
+                      fontSize: 10, fontWeight: FontWeight.normal),
+                  textAlign: TextAlign.start,
+                ),
             ],
           ),
         ),
