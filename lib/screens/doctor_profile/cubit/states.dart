@@ -1,6 +1,5 @@
 part of 'cubit.dart';
 
-@immutable
 abstract class DoctorProfileStates {}
 
 class DoctorProfileInitial extends DoctorProfileStates {}

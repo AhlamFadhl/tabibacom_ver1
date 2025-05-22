@@ -62,9 +62,11 @@ enum ToastStates { SUCCESS, ERROR, WARNING }
 
 String doctorNaming(int no_name) {
   if (no_name == 1)
-    return 'د/';
+    return 'دكتور/';
+  else if (no_name == 2)
+    return 'كوتش/';
   else
-    return 'د/';
+    return 'دكتور/';
 }
 
 Color chooseToastColor(ToastStates state) {
@@ -249,6 +251,5 @@ List<CategoryDoc> list_category = [
 ];
 /////
 ///Hospitals
-
 
 //////

@@ -1,6 +1,5 @@
 part of 'cubit.dart';
 
-@immutable
 abstract class ConfirmBookState {}
 
 class ConfirmBookInitial extends ConfirmBookState {}

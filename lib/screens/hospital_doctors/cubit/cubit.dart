@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:meta/meta.dart';
+
 import 'package:tabibacom_ver1/models/category_model.dart';
 import 'package:tabibacom_ver1/models/doctor_model.dart';
 import 'package:tabibacom_ver1/models/hospital_model.dart';

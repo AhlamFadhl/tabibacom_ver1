@@ -1,5 +1,5 @@
 //const PATH_URL = 'https://tabibacom.com/app/v1/';
-const PATH_URL = 'http://192.168.3.199/tabibacom/app/v1/';
+const PATH_URL = 'http://192.168.8.149/tabibacom/tabibacom_api/';
 const PATH_IMG = PATH_URL + 'images/';
 const PATH_IMG_GROUP = PATH_URL + 'images/group/';
 const LOGIN = 'user/login';

@@ -102,16 +102,10 @@ class HospitalDoctorsPage extends StatelessWidget {
                       child: cubit.isLoading
                           ? Center(child: CircularProgressIndicator())
                           : Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: ListView.separated(
-                              shrinkWrap: true,
-                                itemBuilder: (context, index) => buildDoctorItem(
-                                    cubit.list_doctors[index], context),
-                                separatorBuilder: (context, index) => SizedBox(
-                                      height: 10,
-                                    ),
-                                itemCount: cubit.list_doctors.length),
-                          ))
+                              padding: const EdgeInsets.all(10.0),
+                              child: doctorsListBuilder(
+                                  doctors: cubit.list_doctors),
+                            ))
                 ],
               ),
             ),

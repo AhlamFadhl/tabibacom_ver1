@@ -10,6 +10,7 @@ import 'package:tabibacom_ver1/screens/home/cubit/cubit.dart';
 import 'package:tabibacom_ver1/screens/hospital_profile/hospital_profile_page.dart';
 import 'package:tabibacom_ver1/screens/insurance_list/view/view.dart';
 import 'package:tabibacom_ver1/shared/components/constants.dart';
+import 'package:tabibacom_ver1/widgets/card_doctor_main.dart';
 import 'package:tabibacom_ver1/shared/network/end_points.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
 import 'package:tabibacom_ver1/shared/styles/styles.dart';
@@ -542,163 +543,6 @@ Widget myDivider({Color color = lightColor}) => Padding(
         color: color,
       ),
     );
-Widget buildDoctorItem_Main(Doctor doc, bool profile) => InkWell(
-      onTap: () {
-        Get.to(
-          () => DoctorProfile(crrnt_doctor: doc),
-        );
-      },
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            margin: const EdgeInsetsDirectional.only(end: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-              ),
-          //  border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 150,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                      topLeft: Radius.circular(20),
-                    ),
-                  ),
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl:PATH_IMG+ doc.doc_image,
-                    placeholder: (context, url) => Container(),
-                    errorWidget: (context, url, error) => Container(),
-                  ),
-                ),
-                SizedBox(
-                  width: 8.0,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        doc.cat_name ?? '',
-                        textAlign: TextAlign.start,
-                        style: styleText_mini_colored,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        doctorNaming(0) +
-                            ' ' +
-                            doc.doc_first_name +
-                            ' ' +
-                            doc.doc_last_name,
-                        textAlign: TextAlign.start,
-                        style: styleText,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        doc.doc_specialist ?? '',
-                        textAlign: TextAlign.start,
-                        style: styleText_mini_gryed,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        doc.doc_price.toString(),
-                        style: styleText.copyWith(color: primary2Color,fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        doc.doc_desc,
-                        style: styleText,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Row(
-            children: [
-              Container(
-                height: 50,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-               //   borderRadius: BorderRadius.circular(20),
-                //  border: Border.all(color: Colors.grey.shade300),
-                shape: BoxShape.circle,
-                ),
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl:PATH_IMG+( doc.hsptl_logo ?? ''),
-                  placeholder: (context, url) => Container(),
-                  errorWidget: (context, url, error) => Container(),
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    doc.hsptl_name ?? '',
-                    textAlign: TextAlign.start,
-                    style: styleText_mini_colored.copyWith(fontSize: 10),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    doc.hsptl_address ?? '',
-                    textAlign: TextAlign.start,
-                    style: styleText.copyWith(fontSize: 10),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Container(
-            width: double.infinity,
-            height: 1,
-            color: Colors.grey.shade300,
-          )
-        ],
-      ),
-    );
-
 Widget buildDoctorItem_Top(Doctor doc) => Container(
       /*decoration:
           BoxDecoration(border: Border.all(color: Colors.grey.shade300)),*/
@@ -712,7 +556,7 @@ Widget buildDoctorItem_Top(Doctor doc) => Container(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 150,
+                  height: 120,
                   width: 100,
                   decoration: BoxDecoration(
                     color: Colors.grey.shade200,
@@ -735,7 +579,7 @@ Widget buildDoctorItem_Top(Doctor doc) => Container(
                 ),
                 Expanded(
                   child: Container(
-                    height: 150,
+                    height: 120,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -752,7 +596,7 @@ Widget buildDoctorItem_Top(Doctor doc) => Container(
                           height: 10,
                         ),
                         Text(
-                          doctorNaming(0) +
+                          doctorNaming(doc.doc_naming) +
                               ' ' +
                               doc.doc_first_name +
                               ' ' +
@@ -785,7 +629,7 @@ Widget buildDoctorItem_Top(Doctor doc) => Container(
           Container(
             width: double.infinity,
             height: 1,
-            color: Colors.grey.shade300,
+            color: Colors.grey.shade200,
           ),
           Row(
             children: [
@@ -839,7 +683,7 @@ Widget buildDoctorItem_Top(Doctor doc) => Container(
           Container(
             width: double.infinity,
             height: 1,
-            color: Colors.grey.shade300,
+            color: Colors.grey.shade200,
           )
         ],
       ),
@@ -855,7 +699,7 @@ Widget doctorsListBuilder({
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
-            return buildDoctorItem_Main(doctors[index], false);
+            return CardDoctorMain(doc:  doctors[index]);
           },
           separatorBuilder: (context, index) => SizedBox(
             height: 10,

@@ -13,6 +13,8 @@ import 'package:tabibacom_ver1/shared/components/constants.dart';
 import 'package:tabibacom_ver1/shared/cubit/cubit.dart';
 import 'package:tabibacom_ver1/shared/styles/colors.dart';
 import 'package:tabibacom_ver1/shared/styles/styles.dart';
+import 'package:tabibacom_ver1/widgets/my_border.dart';
+import 'package:tabibacom_ver1/widgets/my_button%20copy.dart';
 
 class DoctorProfile extends StatelessWidget {
   Doctor crrnt_doctor;
@@ -77,7 +79,11 @@ class DoctorProfile extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(height: 30, child: VerticalDivider(color: Colors.grey.shade300,)),
+                        Container(
+                            height: 30,
+                            child: VerticalDivider(
+                              color: Colors.grey.shade200,
+                            )),
                         Expanded(
                             child: Column(
                           children: [
@@ -100,7 +106,9 @@ class DoctorProfile extends StatelessWidget {
                                   width: 8,
                                 ),
                                 Text(
-                                  (crrnt_doctor.doc_price ?? 0).toString(),
+                                  (crrnt_doctor.doc_price ?? 0) > 0
+                                      ? crrnt_doctor.doc_price.toString()
+                                      : 'غير متاح',
                                   style: styleText_mini_colored,
                                 ),
                               ],
@@ -109,7 +117,9 @@ class DoctorProfile extends StatelessWidget {
                         )),
                       ],
                     ),
-                    Divider(color:Colors.grey.shade300,),
+                    Divider(
+                      color: Colors.grey.shade200,
+                    ),
 
                     ///About Doctor
                     Text(
@@ -119,8 +129,21 @@ class DoctorProfile extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      '''${crrnt_doctor.doc_desc}''',
+                    MyBorder(
+                      radius: 4,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 8),
+                        child: Text(
+                          crrnt_doctor.doc_desc.isNotEmpty
+                              ? '''${crrnt_doctor.doc_desc}'''
+                              : 'لا يوجد نبذه عن الطبيب حالياً',
+                          style: TextStyle(
+                              color: crrnt_doctor.doc_desc.isNotEmpty
+                                  ? Colors.black
+                                  : Colors.grey),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -180,20 +203,11 @@ class DoctorProfile extends StatelessWidget {
                       CircularProgressIndicator(),
                     if (state is DoctorProfileGet)
                       buildTimeTable(cubit.list_appoinment),
-
+                    SizedBox(
+                      height: 20,
+                    ),
                     if (state is DoctorProfileError) Container(),
-                    /*  if (cubit.list_appoinment.length != 0)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            cubit.list_appoinment[0].apnt_type == 1
-                                ? 'يومي'
-                                : 'اسبوعي',
-                          ),
-                          Divider(),
-                        ],
-                      ),*/
+
                     if (cubit.list_appoinment.length != 0)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,28 +219,72 @@ class DoctorProfile extends StatelessWidget {
                             style:
                                 styleText_mini_colored.copyWith(fontSize: 14),
                           ),
-                        //  Divider(color: lightColor,),
-                        SizedBox(height: 20,),
+                          //  Divider(color: lightColor,),
+                          SizedBox(
+                            height: 20,
+                          ),
                         ],
                       ),
                     ////Book
                     if (state is DoctorProfileGet)
-                      defaultButton(
-                        function: () {
-                          if (AppCubit.get(context).usrNo != 0) {
-                            Get.to(
-                              () => DoctorAppointment(
-                                  crrnt_doctor: crrnt_doctor,
-                                  appointments: cubit.list_appoinment),
-                            );
-                          } else {
-                            Get.to(
-                              () => SignInPage(),
-                            );
-                          }
-                        },
-                        text: 'حجز موعد',
-                      ),
+                      cubit.list_appoinment.isNotEmpty
+                          ? MyButton(
+                              height: 60,
+                              onTap: () {
+                                if (AppCubit.get(context).usrNo != 0) {
+                                  Get.to(
+                                    () => DoctorAppointment(
+                                        crrnt_doctor: crrnt_doctor,
+                                        appointments: cubit.list_appoinment),
+                                  );
+                                } else {
+                                  Get.to(
+                                    () => SignInPage(),
+                                  );
+                                }
+                              },
+                              title: 'حجز موعد',
+                            )
+                          : Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16, horizontal: 8),
+                              decoration:
+                                  BoxDecoration(color: Colors.amber.shade50),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'لايمكنك حجز موعد مع هذا الطبيب',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                  Wrap(
+                                    children: [
+                                      Text(
+                                        'لانه غير مشترك بــ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      Image.asset(
+                                        'assets/images/logo_h.png',
+                                        width: 60,
+                                        height: 30,
+                                      )
+                                    ],
+                                  ),
+                                  Wrap(
+                                    children: [
+                                      Text(
+                                        'اذا كنت تريد هذا الطبيب أن يشترك معنا  ',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                      InkWell(
+                                          onTap: () {},
+                                          child: Text('سجل هنا ملاحظتك',style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: primaryColor),)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                   ],
                 ),
               ),
@@ -238,17 +296,28 @@ class DoctorProfile extends StatelessWidget {
   }
 
   buildTimeTable(List<AppointmentDetails> list) {
-    return Column(
-      children: [
-        if (list.length >= 1) buidCardTime(list[0]),
-        if (list.length >= 2) buidCardTime(list[1]),
-        if (list.length >= 3) buidCardTime(list[2]),
-        if (list.length >= 4) buidCardTime(list[3]),
-        if (list.length >= 5) buidCardTime(list[4]),
-        if (list.length >= 6) buidCardTime(list[5]),
-        if (list.length >= 7) buidCardTime(list[6]),
-      ],
-    );
+    return list.isNotEmpty
+        ? Column(
+            children: [
+              if (list.length >= 1) buidCardTime(list[0]),
+              if (list.length >= 2) buidCardTime(list[1]),
+              if (list.length >= 3) buidCardTime(list[2]),
+              if (list.length >= 4) buidCardTime(list[3]),
+              if (list.length >= 5) buidCardTime(list[4]),
+              if (list.length >= 6) buidCardTime(list[5]),
+              if (list.length >= 7) buidCardTime(list[6]),
+            ],
+          )
+        : MyBorder(
+            radius: 4,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+              child: Text(
+                'المواعيد غير متاحه لهذا الطبيب',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+          );
   }
 
   buidCardTime(AppointmentDetails apnt) => Column(
@@ -279,7 +348,9 @@ class DoctorProfile extends StatelessWidget {
                 ),
             ],
           ),
-          Divider(color: Colors.grey.shade300,),
+          Divider(
+            color: Colors.grey.shade200,
+          ),
         ],
       );
 }
